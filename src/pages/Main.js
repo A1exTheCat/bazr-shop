@@ -1,7 +1,8 @@
 import React from "react";
+import BigSlider from "../components/BigSlider";
 
 const Main = () => {
-  return <div>MAIN</div>;
+  return <BigSlider />;
 };
 
 export default Main;

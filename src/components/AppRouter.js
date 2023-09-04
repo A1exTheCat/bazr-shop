@@ -1,17 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { authRoutes, publicRoutes } from "../routes";
+import { publicRoutes } from "../routes";
 import { MAIN_ROUTE } from "../utils/consts";
 import { useSelector, useDispatch } from "react-redux";
 
 const AppRouter = () => {
-  const isAuth = useSelector((state) => state.user.isAuth);
-
   return (
     <Routes>
-      {isAuth &&
-        authRoutes.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} exact />
-        ))}
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} exact />
       ))}
