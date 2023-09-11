@@ -6,8 +6,15 @@ import {
 } from "../utils/consts";
 import instagramIcon from "../assets/socialIcons/instagram.png";
 import vkIcon from "../assets/socialIcons/vk.png";
+import { useSelector, useDispatch } from "react-redux";
+import { setTypeId } from "../store/shopSlice";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const types = useSelector((state) => state.shop.types.data);
+
   return (
     <section className="footer">
       <div className="container">
@@ -15,31 +22,40 @@ const Footer = () => {
           <ul className="footer-list">
             <li className="list-head">Магазин</li>
             <li>
-              <a href={SHOP_ROUTE}>Вся одежда</a>
+              <span
+                onClick={() => {
+                  dispatch(setTypeId("all"));
+                  navigate(SHOP_ROUTE);
+                }}
+              >
+                Вся одежда
+              </span>
             </li>
-            <li>
-              <a href={SHOP_ROUTE}>Футболки</a>
-            </li>
-            <li>
-              <a href={SHOP_ROUTE}>Кофты</a>
-            </li>
-            <li>
-              <a href={SHOP_ROUTE}>Брюки</a>
-            </li>
-            <li>
-              <a href={SHOP_ROUTE}>Куртки</a>
-            </li>
+            {types.map((type) => {
+              return (
+                <li key={type.id}>
+                  <span
+                    onClick={() => {
+                      dispatch(setTypeId(type.id));
+                      navigate(SHOP_ROUTE);
+                    }}
+                  >
+                    {type.attributes.name}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
           <ul className="footer-list">
             <li className="list-head">О нас</li>
             <li>
-              <a href={ABOUT_ROUTE}>О магазине</a>
+              <span onClick={() => navigate(ABOUT_ROUTE)}>О магазине</span>
             </li>
             <li>
-              <a href={DELIVERY_ROUTE}>Доставка</a>
+              <span onClick={() => navigate(DELIVERY_ROUTE)}>Доставка</span>
             </li>
             <li>
-              <a href={CONTACTS_ROUTE}>Контакты</a>
+              <span onClick={() => navigate(CONTACTS_ROUTE)}>Контакты</span>
             </li>
           </ul>
           <ul className="footer-list">

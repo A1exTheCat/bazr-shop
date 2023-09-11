@@ -1,48 +1,86 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  fetchTypes,
+  fetchColors,
+  fetchSizes,
+  fetchItems,
+} from "../http/itemsAPI";
 
 const initialState = {
-  types: [
-    { id: 1, name: "Вся одежда" },
-    { id: 2, name: "Куртки" },
-    { id: 3, name: "Рубашки" },
-    { id: 4, name: "Футболки" },
-    { id: 5, name: "Пиджаки" },
-    { id: 6, name: "Брюки" },
-    { id: 7, name: "Лонгсливы" },
-  ],
-  colors: [
-    { id: 1, name: "Все цвета" },
-    { id: 2, name: "Черный" },
-    { id: 3, name: "Белый" },
-    { id: 4, name: "Серый" },
-    { id: 5, name: "Паттерн" },
-  ],
-  sizes: [
-    { id: 1, name: "Все размеры" },
-    { id: 2, name: "XS" },
-    { id: 3, name: "S" },
-    { id: 4, name: "M" },
-    { id: 5, name: "L" },
-    { id: 6, name: "XL" },
-  ],
+  types: [],
+  colors: [],
+  sizes: [],
+  items: [],
+  typeId: "all",
+  colorIds: [],
+  sizeIds: [],
+  loading: true,
 };
+
+export const fetchInitialData = createAsyncThunk(
+  "shop/fetchDataFilters",
+  async () => {
+    const types = await fetchTypes();
+    const colors = await fetchColors();
+    const sizes = await fetchSizes();
+    const items = await fetchItems();
+
+    return { types, colors, sizes, items };
+  }
+);
+
 const shopSlice = createSlice({
   name: "shopSlice",
   initialState,
 
   reducers: {
-    setTypes: (state, action) => {
-      state.types = action.payload;
+    setItems: (state, action) => {
+      state.items = action.payload;
     },
-    setColors: (state, action) => {
-      state.colors = action.payload;
+    setTypeId: (state, action) => {
+      state.typeId = action.payload;
     },
-    setSize: (state, action) => {
-      state.sizes = action.payload;
+    setColorIds: (state, action) => {
+      state.colorIds.push(action.payload);
     },
+    setSizeIds: (state, action) => {
+      state.sizeIds.push(action.payload);
+    },
+    removeColorIds: (state, action) => {
+      const filteredIds = state.colorIds.filter((id) => id !== action.payload);
+      state.colorIds = filteredIds;
+    },
+    removeSizeIds: (state, action) => {
+      const filteredIds = state.sizeIds.filter((id) => id !== action.payload);
+      state.sizeIds = filteredIds;
+    },
+    defaultColors: (state) => {
+      state.colorIds = [];
+    },
+    defaultSizes: (state) => {
+      state.sizeIds = [];
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchInitialData.fulfilled, (state, action) => {
+      state.types = action.payload.types;
+      state.colors = action.payload.colors;
+      state.sizes = action.payload.sizes;
+      state.items = action.payload.items;
+      state.loading = false;
+    });
   },
 });
 
-export const { setTypes, setColors, setSize } = shopSlice.actions;
+export const {
+  setItems,
+  setTypeId,
+  setColorIds,
+  setSizeIds,
+  removeColorIds,
+  removeSizeIds,
+  defaultColors,
+  defaultSizes,
+} = shopSlice.actions;
 
 export default shopSlice.reducer;

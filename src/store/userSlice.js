@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isAuth: false,
-  user: {},
+  favorite: [],
+  basket: [],
 };
 
 const userSlice = createSlice({
@@ -10,15 +10,43 @@ const userSlice = createSlice({
   initialState,
 
   reducers: {
-    setIsAuth: (state, action) => {
-      state.isAuth = action.payload;
+    setFavorite: (state, action) => {
+      state.favorite = action.payload;
     },
-    setUser: (state, action) => {
-      state.user = action.payload;
+    setBasket: (state, action) => {
+      state.basket = action.payload;
+    },
+    addFavorite: (state, action) => {
+      state.favorite.push(action.payload);
+      localStorage.setItem("favorite", JSON.stringify(state.favorite));
+    },
+    addBasket: (state, action) => {
+      state.basket.push(action.payload);
+      localStorage.setItem("basket", JSON.stringify(state.basket));
+    },
+    removeFavorite: (state, action) => {
+      const filteredFavorite = state.favorite.filter(
+        (id) => id !== action.payload
+      );
+      state.favorite = filteredFavorite;
+      localStorage.setItem("favorite", JSON.stringify(state.favorite));
+    },
+    removeBasket: (state, action) => {
+      const filteredBasket = state.basket.filter((id) => id !== action.payload);
+      state.basket = filteredBasket;
+      localStorage.setItem("basket", JSON.stringify(state.basket));
     },
   },
 });
 
-export const { setIsAuth, setUser } = userSlice.actions;
+export const {
+  setUser,
+  setFavorite,
+  setBasket,
+  addFavorite,
+  addBasket,
+  removeFavorite,
+  removeBasket,
+} = userSlice.actions;
 
 export default userSlice.reducer;

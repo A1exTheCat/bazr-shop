@@ -10,44 +10,71 @@ import {
 import logo from "../assets/icons/logo.svg";
 import heart from "../assets/icons/heart.svg";
 import basket from "../assets/icons/basket.svg";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <header className="header">
       <div className="container">
         <div className="header-nav">
           <ul className="nav-list">
             <li>
-              <a className="active" href={MAIN_ROUTE}>
+              <span
+                className={location.pathname === MAIN_ROUTE ? "active" : ""}
+                onClick={() => navigate(MAIN_ROUTE)}
+              >
                 Главная
-              </a>
+              </span>
             </li>
             <li>
-              <a href={SHOP_ROUTE}>Магазин</a>
+              <span
+                className={location.pathname === SHOP_ROUTE ? "active" : ""}
+                onClick={() => navigate(SHOP_ROUTE)}
+              >
+                Магазин
+              </span>
             </li>
             <li>
-              <a href={ABOUT_ROUTE}>О нас</a>
+              <span
+                className={location.pathname === ABOUT_ROUTE ? "active" : ""}
+                onClick={() => navigate(ABOUT_ROUTE)}
+              >
+                О нас
+              </span>
             </li>
           </ul>
-          <a className="logo-link" href={MAIN_ROUTE}>
+          <span className="logo-link" onClick={() => navigate(MAIN_ROUTE)}>
             <img className="img-logo" src={logo} alt="logo" />
-          </a>
+          </span>
           <ul className="nav-list">
             <li>
-              <a href={DELIVERY_ROUTE}>Доставка</a>
+              <span
+                className={location.pathname === DELIVERY_ROUTE ? "active" : ""}
+                onClick={() => navigate(DELIVERY_ROUTE)}
+              >
+                Доставка
+              </span>
             </li>
             <li>
-              <a href={CONTACTS_ROUTE}>Контакты</a>
+              <span
+                className={location.pathname === CONTACTS_ROUTE ? "active" : ""}
+                onClick={() => navigate(CONTACTS_ROUTE)}
+              >
+                Контакты
+              </span>
             </li>
             <li>
-              <a href={FAVORITE_ROUTE}>
+              <span onClick={() => navigate(FAVORITE_ROUTE)}>
                 <img className="img-nav" src={heart} alt="Избранное" />
-              </a>
+              </span>
             </li>
             <li>
-              <a href={BASKET_ROUTE}>
+              <span onClick={() => navigate(BASKET_ROUTE)}>
                 <img className="img-nav" src={basket} alt="Корзина" />
-              </a>
+              </span>
             </li>
           </ul>
         </div>
