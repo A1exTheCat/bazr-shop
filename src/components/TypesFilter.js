@@ -8,12 +8,6 @@ const TypeFilter = () => {
   const types = useSelector((state) => state.shop.types.data);
   const activeTypeId = useSelector((state) => state.shop.typeId);
 
-  useEffect(() => {
-    return () => {
-      dispatch(setTypeId("all"));
-    };
-  }, [dispatch]);
-
   return (
     <section className="catalog">
       <ul className="catalog-menu">

@@ -385,24 +385,23 @@ a {
   max-width: 1200px;
   margin: auto;
 }
-  /* Кнопка назад */
 
 .back-btn {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin: 1rem;
+  cursor: pointer;
 }
 
-.back-btn svg {
+.back-btn img {
   width: 15px;
   margin-right: 10px;
 }
 
-.back-btn a {
+.back-btn span {
   color: #333;
 }
-
-  /*Карточка*/
 
 .card-information {
   display: flex;
@@ -416,6 +415,7 @@ a {
 .card-images {
   position: relative;
   display: flex;
+  height: auto;
   flex-direction: column;
   gap: 10px;
   margin: 0 20px;
@@ -454,7 +454,7 @@ a {
 
 .main-image {
   max-width: 500px;
-  max-height: 750px;
+  height: 750px;
   object-fit: contain;
   transition: transform 0.3s ease-in-out;
 }
@@ -490,13 +490,23 @@ a {
 
 .add-to-cart {
   padding: 10px 20px;
-  background-color: #333;
-  color: white;
-  border: none;
+  color: #333;
+  border: 3px solid #333;
+  background-color: #fff;
   cursor: pointer;
+  transition: transform 0.8s all;
 }
 
-.card-buttons .favorite-button {
-  fill: #333;
-  width: 30px;
+.add-to-cart:hover {
+  color: #fff;
+  border: 3px solid #333;
+  background: #333;
+}
+
+.go-to-cart {
+  padding: 10px 20px;
+  border: 3px solid #333;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
 }

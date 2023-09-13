@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CARD_ROUTE } from "../utils/consts";
+import { CARD_ROUTE, HOST } from "../utils/consts";
 import { addFavorite, removeFavorite } from "../store/userSlice";
 import lineationHeart from "../assets/icons/heart-contur.png";
 import redHeart from "../assets/icons/heart-red.png";
@@ -30,22 +30,21 @@ const ItemsList = () => {
         const { name, price } = item.attributes;
         const [picture1, picture2] = item.attributes.pictures.data;
         const isFavorite = favorites.includes(id);
-
         return (
           <div
             className="product-link"
             key={id}
-            onClick={() => navigate(`${CARD_ROUTE} + ${id.toString()}`)}
+            onClick={() => navigate(`${CARD_ROUTE}/${id.toString()}`)}
           >
             <div className="product-card">
               <div className="product-image">
                 <img
-                  src={`http://localhost:1337${picture1.attributes.formats.medium.url}`}
+                  src={`${HOST}${picture1.attributes.formats.medium.url}`}
                   alt="Product1"
                   className="default-image"
                 />
                 <img
-                  src={`http://localhost:1337${picture2.attributes.formats.medium.url}`}
+                  src={`${HOST}${picture2.attributes.formats.medium.url}`}
                   alt="Product2"
                   className="alternate-image"
                 />
@@ -67,7 +66,7 @@ const ItemsList = () => {
                 >
                   <img
                     src={isFavorite ? redHeart : lineationHeart}
-                    alt="emptyHeart"
+                    alt="Heart"
                   />
                 </button>
               </div>

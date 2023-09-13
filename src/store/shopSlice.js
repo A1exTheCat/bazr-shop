@@ -54,12 +54,6 @@ const shopSlice = createSlice({
       const filteredIds = state.sizeIds.filter((id) => id !== action.payload);
       state.sizeIds = filteredIds;
     },
-    defaultColors: (state) => {
-      state.colorIds = [];
-    },
-    defaultSizes: (state) => {
-      state.sizeIds = [];
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchInitialData.fulfilled, (state, action) => {
@@ -79,8 +73,6 @@ export const {
   setSizeIds,
   removeColorIds,
   removeSizeIds,
-  defaultColors,
-  defaultSizes,
 } = shopSlice.actions;
 
 export default shopSlice.reducer;

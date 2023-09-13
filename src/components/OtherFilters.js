@@ -6,8 +6,6 @@ import {
   removeColorIds,
   setSizeIds,
   removeSizeIds,
-  defaultColors,
-  defaultSizes,
 } from "../store/shopSlice";
 
 const OtherFilters = () => {
@@ -17,13 +15,8 @@ const OtherFilters = () => {
 
   const colors = useSelector((state) => state.shop.colors.data);
   const sizes = useSelector((state) => state.shop.sizes.data);
-
-  useEffect(() => {
-    return () => {
-      dispatch(defaultColors());
-      dispatch(defaultSizes());
-    };
-  }, [dispatch]);
+  const colorIds = useSelector((state) => state.shop.colorIds);
+  const sizeIds = useSelector((state) => state.shop.sizeIds);
 
   return (
     <section className="filters">
@@ -43,7 +36,6 @@ const OtherFilters = () => {
             const handleCheckboxChange = (event) => {
               const isChecked = event.target.checked; // Получаем состояние чекбокса (true или false)
               const colorId = color.id;
-
               if (isChecked) {
                 dispatch(setColorIds(colorId));
               } else {
@@ -56,6 +48,7 @@ const OtherFilters = () => {
                   type="checkbox"
                   id={color.id}
                   onChange={handleCheckboxChange}
+                  checked={colorIds.includes(color.id) ? true : false}
                 />
                 <span>{color.attributes.name}</span>
               </label>
@@ -92,6 +85,7 @@ const OtherFilters = () => {
                   type="checkbox"
                   id={size.id}
                   onChange={handleCheckboxChange}
+                  checked={sizeIds.includes(size.id) ? true : false}
                 ></input>
                 <span>{size.attributes.name}</span>
               </label>

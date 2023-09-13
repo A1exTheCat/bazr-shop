@@ -6,6 +6,7 @@ export const CONTACTS_ROUTE = "/contacts";
 export const DELIVERY_ROUTE = "/delivery";
 export const ABOUT_ROUTE = "/about";
 export const FAVORITE_ROUTE = "/favorite";
+export const HOST = "http://localhost:1337";
 export const SliderPics = [
   "http://localhost:1337/uploads/1_2f75e17680.jpg",
   "http://localhost:1337/uploads/2_d36385496b.jpg",
