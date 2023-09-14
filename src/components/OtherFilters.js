@@ -13,8 +13,8 @@ const OtherFilters = () => {
   const [activeColor, setActiveColor] = useState(false);
   const [activeSize, setActiveSize] = useState(false);
 
-  const colors = useSelector((state) => state.shop.colors.data);
-  const sizes = useSelector((state) => state.shop.sizes.data);
+  const colors = useSelector((state) => state.shop.colors);
+  const sizes = useSelector((state) => state.shop.sizes);
   const colorIds = useSelector((state) => state.shop.colorIds);
   const sizeIds = useSelector((state) => state.shop.sizeIds);
 
@@ -50,7 +50,7 @@ const OtherFilters = () => {
                   onChange={handleCheckboxChange}
                   checked={colorIds.includes(color.id) ? true : false}
                 />
-                <span>{color.attributes.name}</span>
+                <span>{color.name}</span>
               </label>
             );
           })}
@@ -87,7 +87,7 @@ const OtherFilters = () => {
                   onChange={handleCheckboxChange}
                   checked={sizeIds.includes(size.id) ? true : false}
                 ></input>
-                <span>{size.attributes.name}</span>
+                <span>{size.name}</span>
               </label>
             );
           })}

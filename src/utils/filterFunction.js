@@ -3,7 +3,7 @@ const filterFunction = (items, type, colors, sizes) => {
     type === "all"
       ? items
       : items.filter((item) => {
-          const itemType = item.attributes.type.data.id;
+          const itemType = item.type.id;
           if (itemType === type) {
             return true;
           }
@@ -14,14 +14,14 @@ const filterFunction = (items, type, colors, sizes) => {
     colors.length === 0
       ? typeFiltered
       : typeFiltered.filter((item) => {
-          return colors.includes(item.attributes.color.data.id);
+          return colors.includes(item.color.id);
         });
 
   const filteredItems =
     sizes.length === 0
       ? colorFiltered
       : colorFiltered.filter((item) => {
-          return sizes.includes(item.attributes.size.data.id);
+          return sizes.includes(item.size.id);
         });
 
   return filteredItems;

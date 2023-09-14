@@ -5,13 +5,15 @@ import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Favorite from "./components/Favorite";
 import { fetchInitialData } from "./store/shopSlice";
 import { setFavorite, setBasket } from "./store/userSlice";
+import Basket from "./components/Basket";
 
 function App() {
   const dispatch = useDispatch();
 
-  const loading = useSelector((state) => state.shop.loading);
+  const loading = useSelector((state) => state.ui.loading);
 
   useEffect(() => {
     const favorite =
@@ -38,6 +40,8 @@ function App() {
       <Navbar />
       <AppRouter />
       <Footer />
+      <Favorite />
+      <Basket />
     </BrowserRouter>
   );
 }

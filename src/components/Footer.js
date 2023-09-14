@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const Footer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const types = useSelector((state) => state.shop.types.data);
+  const types = useSelector((state) => state.shop.types);
 
   return (
     <section className="footer">
@@ -40,7 +40,7 @@ const Footer = () => {
                       navigate(SHOP_ROUTE);
                     }}
                   >
-                    {type.attributes.name}
+                    {type.name}
                   </span>
                 </li>
               );

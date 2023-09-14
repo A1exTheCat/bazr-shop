@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CARD_ROUTE, HOST } from "../utils/consts";
+import { CARD_ROUTE } from "../utils/consts";
 import { addFavorite, removeFavorite } from "../store/userSlice";
 import lineationHeart from "../assets/icons/heart-contur.png";
 import redHeart from "../assets/icons/heart-red.png";
 import filterFunction from "../utils/filterFunction";
 
 const ItemsList = () => {
-  const items = useSelector((state) => state.shop.items.data);
+  const items = useSelector((state) => state.shop.items);
   const currentType = useSelector((state) => state.shop.typeId);
   const currentColors = useSelector((state) => state.shop.colorIds);
   const currentSizes = useSelector((state) => state.shop.sizeIds);
@@ -27,8 +27,8 @@ const ItemsList = () => {
     <section className="cards-list">
       {filteredItems.map((item) => {
         const { id } = item;
-        const { name, price } = item.attributes;
-        const [picture1, picture2] = item.attributes.pictures.data;
+        const { name, price, bigPictures } = item;
+        const [picture1, picture2] = bigPictures;
         const isFavorite = favorites.includes(id);
         return (
           <div
@@ -39,12 +39,12 @@ const ItemsList = () => {
             <div className="product-card">
               <div className="product-image">
                 <img
-                  src={`${HOST}${picture1.attributes.formats.medium.url}`}
+                  src={`${picture1}`}
                   alt="Product1"
                   className="default-image"
                 />
                 <img
-                  src={`${HOST}${picture2.attributes.formats.medium.url}`}
+                  src={`${picture2}`}
                   alt="Product2"
                   className="alternate-image"
                 />

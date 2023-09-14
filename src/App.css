@@ -510,3 +510,123 @@ a {
   color: white;
   cursor: pointer;
 }
+
+/*Favorite popup */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.modal-overlay.open {
+  left: 0;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  height: 100%;
+  width: 500px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.popup.open {
+  right: 0;
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.popup button {
+  margin-top: 10px;
+  color: #333;
+}
+
+/*Basket popup */
+
+.basket-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Стили для поп-апа */
+.basket-popup {
+  width: 400px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.basket-popup-content {
+  padding: 20px;
+  color: #333;
+}
+
+.basket-popup-content .favorite-list {
+  list-style: none;
+  padding: 0;
+}
+
+.basket-popup-content .favorite-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.basket-popup-content .product-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.basket-popup-content .product-details {
+  flex-grow: 1;
+}
+
+.basket-popup-content .product-name {
+  margin: 0;
+}
+
+.basket-popup-content .product-price {
+  margin: 0;
+  font-weight: bold;
+}
+
+.basket-popup-content .product-size {
+  margin: 0;
+  color: #777;
+}
+
+.basket-popup-content .remove-button {
+  background-color: #f00;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.popup-content h2 {
+  margin: 0;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #333;
+}

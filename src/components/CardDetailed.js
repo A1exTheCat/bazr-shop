@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite, addBasket } from "../store/userSlice";
-import { SHOP_ROUTE, HOST, BASKET_ROUTE } from "../utils/consts";
+import { setBasketPopup } from "../store/uiSlice";
+import { SHOP_ROUTE, HOST } from "../utils/consts";
 import backArrow from "../assets/icons/arrow-back.svg";
 import leftSign from "../assets/slider UI/left sign.svg";
 import rightSign from "../assets/slider UI/right sign.svg";
@@ -16,21 +17,10 @@ const CardDetailed = () => {
   const itemId = Number(id);
   const [imageIndex, setImageIndex] = useState(0);
 
-  const items = useSelector((state) => state.shop.items.data);
+  const items = useSelector((state) => state.shop.items);
   const item = items.find((item) => item.id === itemId);
-  const pictures = item.attributes.pictures.data;
-
-  const bigPictures = pictures.reduce((acc, pic) => {
-    const newPic = pic.attributes.formats.large.url;
-    acc.push(`${HOST}${newPic}`);
-    return acc;
-  }, []);
-
-  const thumbnailsPictures = pictures.reduce((acc, pic) => {
-    const newPic = pic.attributes.formats.thumbnail.url;
-    acc.push(`${HOST}${newPic}`);
-    return acc;
-  }, []);
+  const bigPictures = item.bigPictures;
+  const thumbnailsPictures = item.thumbnailsPictures;
 
   const goToNextPic = () => {
     setImageIndex((prevIndex) => (prevIndex + 1) % bigPictures.length);
@@ -46,8 +36,7 @@ const CardDetailed = () => {
   const isFavorite = favorites.includes(itemId);
   const basket = useSelector((state) => state.user.basket);
   const isBasket = basket.includes(itemId);
-  console.log(basket);
-  console.log(isBasket);
+  const { name, size, color, type, price, description } = item;
   return (
     <div className="card-container">
       <div className="back-btn" onClick={() => navigate(SHOP_ROUTE)}>
@@ -89,22 +78,17 @@ const CardDetailed = () => {
           </div>
         </div>
         <div className="product-card-info">
-          <h2 className="product-card-title">{item.attributes.name}</h2>
-          <p className="product-card-description">
-            Размер: {item.attributes.size.data.attributes.name}
-          </p>
-          <p className="product-card-description">
-            Цвет: {item.attributes.color.data.attributes.name}
-          </p>
-          <p className="product-card-description">
-            Описание: {item.attributes.description}
-          </p>
-          <p className="product-card-price">Цена: {item.attributes.price} ₽</p>
+          <h2 className="product-card-title">{name}</h2>
+          <p className="product-card-description">Размер: {size.name}</p>
+          <p className="product-card-description">Цвет: {color.name}</p>
+          <p className="product-card-description">Тип: {type.name}</p>
+          <p className="product-card-description">Описание: {description}</p>
+          <p className="product-card-price">Цена: {price} ₽</p>
           <div className="card-buttons">
             {isBasket ? (
               <button
                 className="go-to-cart"
-                onClick={() => navigate(BASKET_ROUTE)}
+                onClick={() => dispatch(setBasketPopup())}
               >
                 Перейти в корзину
               </button>

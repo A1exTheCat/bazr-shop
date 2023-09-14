@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { HOST } from "../utils/consts";
 import {
   fetchTypes,
   fetchColors,
@@ -14,7 +15,6 @@ const initialState = {
   typeId: "all",
   colorIds: [],
   sizeIds: [],
-  loading: true,
 };
 
 export const fetchInitialData = createAsyncThunk(
@@ -57,11 +57,73 @@ const shopSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchInitialData.fulfilled, (state, action) => {
-      state.types = action.payload.types;
-      state.colors = action.payload.colors;
-      state.sizes = action.payload.sizes;
-      state.items = action.payload.items;
-      state.loading = false;
+      const normalizedTypes = action.payload.types.data.map((type) => {
+        const normalizedData = {
+          id: type.id,
+          name: type.attributes.name,
+        };
+        return normalizedData;
+      });
+
+      const normalizedSizes = action.payload.sizes.data.map((size) => {
+        const normalizedData = {
+          id: size.id,
+          name: size.attributes.name,
+        };
+        return normalizedData;
+      });
+
+      const normalizedColors = action.payload.colors.data.map((color) => {
+        const normalizedData = {
+          id: color.id,
+          name: color.attributes.name,
+        };
+        return normalizedData;
+      });
+
+      const normalizedItems = action.payload.items.data.map((item) => {
+        const bigPictures = item.attributes.pictures.data.reduce((acc, pic) => {
+          const newPic = pic.attributes.formats.large.url;
+          acc.push(`${HOST}${newPic}`);
+          return acc;
+        }, []);
+
+        const thumbnailsPictures = item.attributes.pictures.data.reduce(
+          (acc, pic) => {
+            const newPic = pic.attributes.formats.thumbnail.url;
+            acc.push(`${HOST}${newPic}`);
+            return acc;
+          },
+          []
+        );
+
+        const normalizedData = {
+          id: item.id,
+          name: item.attributes.name,
+          price: item.attributes.price,
+          size: {
+            id: item.attributes.size.data.id,
+            name: item.attributes.size.data.attributes.name,
+          },
+          color: {
+            id: item.attributes.color.data.id,
+            name: item.attributes.color.data.attributes.name,
+          },
+          type: {
+            id: item.attributes.type.data.id,
+            name: item.attributes.type.data.attributes.name,
+          },
+          description: item.attributes.description,
+          bigPictures,
+          thumbnailsPictures,
+        };
+        return normalizedData;
+      });
+
+      state.types = normalizedTypes;
+      state.sizes = normalizedSizes;
+      state.colors = normalizedColors;
+      state.items = normalizedItems;
     });
   },
 });

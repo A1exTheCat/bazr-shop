@@ -1,20 +1,21 @@
 import {
-  BASKET_ROUTE,
   CONTACTS_ROUTE,
   DELIVERY_ROUTE,
   MAIN_ROUTE,
   SHOP_ROUTE,
   ABOUT_ROUTE,
-  FAVORITE_ROUTE,
 } from "../utils/consts";
 import logo from "../assets/icons/logo.svg";
 import heart from "../assets/icons/heart.svg";
 import basket from "../assets/icons/basket.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { setFavoritePopup, setBasketPopup } from "../store/uiSlice";
+import { useDispatch } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <header className="header">
@@ -67,12 +68,12 @@ const Navbar = () => {
               </span>
             </li>
             <li>
-              <span onClick={() => navigate(FAVORITE_ROUTE)}>
+              <span onClick={() => dispatch(setFavoritePopup())}>
                 <img className="img-nav" src={heart} alt="Избранное" />
               </span>
             </li>
             <li>
-              <span onClick={() => navigate(BASKET_ROUTE)}>
+              <span onClick={() => dispatch(setBasketPopup())}>
                 <img className="img-nav" src={basket} alt="Корзина" />
               </span>
             </li>

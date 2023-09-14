@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTypeId } from "../store/shopSlice";
 
 const TypeFilter = () => {
   const dispatch = useDispatch();
 
-  const types = useSelector((state) => state.shop.types.data);
+  const types = useSelector((state) => state.shop.types);
   const activeTypeId = useSelector((state) => state.shop.typeId);
 
   return (
@@ -29,7 +29,7 @@ const TypeFilter = () => {
               }`}
               onClick={() => dispatch(setTypeId(type.id))}
             >
-              {type.attributes.name}
+              {type.name}
             </li>
           );
         })}
