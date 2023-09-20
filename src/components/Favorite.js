@@ -13,27 +13,34 @@ const Favorite = () => {
 
   return (
     <div className={`modal-overlay ${isOpen ? "open" : ""}`}>
-      <div className={`popup ${isOpen ? "open" : ""}`}>
-        <div className="popup-content">
-          <h2>Избранные товары</h2>
+      <div className={`fav-popup ${isOpen ? "open" : ""}`}>
+        <div className="fav-popup-content">
+          <h2>Избранное</h2>
+          <button
+            className="fav-close-popup"
+            onClick={() => dispatch(setFavoritePopup())}
+          >
+            Закрыть
+          </button>
           <ul className="favorite-list">
             {filteredItems.map((product) => (
               <li key={product.id} className="favorite-item">
                 <img
                   src={product.thumbnailsPictures[0]}
                   alt={product.name}
-                  className="product-image"
+                  className="fav-product-image"
                 />
-                <div className="product-details">
-                  <h3 className="product-name">{product.name}</h3>
-                  <p className="product-price">{product.price}</p>
-                  <p className="product-size">Размер: {product.size.name}</p>
+                <div className="fav-product-details">
+                  <h3 className="fav-product-name">{product.name}</h3>
+                  <p className="fav-product-size">
+                    Размер: {product.size.name}
+                  </p>
                 </div>
-                <button className="remove-button">Удалить</button>
+                <p className="fav-product-price">{product.price} ₽</p>
+                <button className="fav-remove-button">Удалить</button>
               </li>
             ))}
           </ul>
-          <button onClick={() => dispatch(setFavoritePopup())}>Закрыть</button>
         </div>
       </div>
     </div>
