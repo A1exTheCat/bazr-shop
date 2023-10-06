@@ -50,18 +50,21 @@ const BigSlider = () => {
         className="slider-img"
         src={SliderPics[currentIndex]}
         alt={`Slide ${currentIndex + 1}`}
+        loading="lazy"
       />
       <img
         src={leftSign}
         onClick={goToPrevSlide}
         alt="Кнопка влево"
         className="slider-btn-left"
+        loading="lazy"
       />
       <img
         src={rightSign}
         onClick={goToNextSlide}
         alt="Кнопка вправо"
         className="slider-btn-right"
+        loading="lazy"
       />
       <div className="slider-menu">
         <div className="slider-menu-flex">

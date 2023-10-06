@@ -135,7 +135,7 @@ a {
 .footer .container {
   display: flex;
   flex-direction: column;
-  
+
 }
 
 .footer {
@@ -143,7 +143,7 @@ a {
   padding: 30px 5%;
 }
 
-.footer span{
+.footer span {
   cursor: pointer;
 }
 
@@ -208,15 +208,16 @@ a {
   padding: 0.6rem 0.7rem;
   border-radius: 10px;
   margin-right: 1rem;
-  border:#333;
+  border: #333;
   color: #333;
-  border-style:solid;
+  border-style: solid;
   border-width: 2px;
   background-color: #fff;
   transition: all 0.1s ease-in-out;
 }
 
-.catalog-menu-link:hover, .catalog-menu-link.active {
+.catalog-menu-link:hover,
+.catalog-menu-link.active {
   background-color: #333;
   color: #fff;
   cursor: pointer;
@@ -245,7 +246,8 @@ a {
   align-items: center;
   border-style: solid;
   border-width: 2px;
-  background-color: #fff; /* Цвет кнопки */
+  background-color: #fff;
+  /* Цвет кнопки */
   color: #333;
   cursor: pointer;
 }
@@ -254,6 +256,7 @@ a {
   width: 20px;
   margin-left: 5px;
 }
+
 .menu-button:hover {
   color: #b3b0b0;
   fill: #b3b0b0;
@@ -262,7 +265,7 @@ a {
 .menu-content {
   display: none;
   z-index: 1;
-  width:auto;
+  width: auto;
   position: absolute;
   transition: left 0.3s ease;
   background-color: #fff;
@@ -462,7 +465,7 @@ a {
 .product-card-info {
   display: flex;
   flex-direction: column;
-  width: auto;
+  max-width: 400px;
 }
 
 .product-card-title {
@@ -515,6 +518,7 @@ a {
 
 .modal-overlay {
   position: fixed;
+  overflow: auto;
   top: 0;
   left: 100%;
   width: 100%;
@@ -529,14 +533,16 @@ a {
 
 .fav-popup {
   position: fixed;
+  overflow: auto;
   top: 0;
   right: -500px;
-  height: 100%;
+  min-height: 100vh;
+  max-height: 100%;
   width: 500px;
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transition: right 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .fav-popup.open {
@@ -552,9 +558,18 @@ a {
 
 .fav-popup-content h2 {
   color: #333;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   padding-bottom: 1rem;
+}
+
+.fav-close-popup {
+  position: absolute;
+  margin: 15px;
+  width: 30px;
+  top: 0;
+  right: 0;
+  color: #333;
 }
 
 .favorite-list {
@@ -578,10 +593,19 @@ a {
   border-radius: 10px;
 }
 
+.fav-product-details-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+}
+
 .fav-product-details {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  margin: 0 15px;
+  max-width: 170px;
 }
 
 .fav-product-name {
@@ -599,18 +623,109 @@ a {
 
 .fav-product-price {
   color: #333;
+  margin-right: 15px;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .fav-remove-button {
+  width: 25px;
+}
+
+/* Basket modal */
+
+.basket-popup {
+  display: none;
+  max-width: 600px;
+  margin: 65px auto;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;
+  z-index: 3000;
+}
+
+.basket-popup.open {
+  display: block;
+}
+
+.basket-popup-content {
+  position: relative;
+  display: flex;
+  padding: 15px;
+  flex-direction: column;
   color: #333;
 }
 
-.fav-close-popup {
+.basket-popup-content h2 {
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding-bottom: 2rem;
+}
+
+.basket-close-popup {
   position: absolute;
-  margin: 25px;
+  width: 30px;
   top: 0;
   right: 0;
   color: #333;
+}
+
+.basket-list {
+  display: flex;
+  flex-direction: column;
+  color: #333;
+  gap: 15px;
+}
+
+.basket-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.basket-product-image {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.basket-product-details-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 330px;
+}
+
+.basket-product-details {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+}
+
+.basket-product-name {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.basket-product-size {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.basket-product-price {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.basket-remove-button {
+  width: 20px;
 }
