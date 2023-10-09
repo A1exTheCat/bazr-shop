@@ -11,3 +11,6 @@ export const SliderPics = [
   "http://localhost:1337/uploads/3_2e5e4c8d49.jpg",
   "http://localhost:1337/uploads/4_e90bbdca68.jpg",
 ];
+
+export const DeliveryOptions = ["Самовывоз", "Сдэк"];
+export const PaymentOptions = ["Наличными", "Карта"];
